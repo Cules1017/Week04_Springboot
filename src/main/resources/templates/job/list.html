@@ -80,7 +80,7 @@
                 <td th:text="${job.job_desc}"></td>
                 <td th:text="${job.company.comp_name}"></td>
                 <td>
-                    <a th:href="@{'job/' + ${job.Id}}">Detail</a>
+                    <a th:href="@{'/job/' + ${job.Id}}">Detail</a>
                 </td>
             </tr>
         </tbody>
@@ -94,5 +94,6 @@
         </ul>
     </div>
     <a href="/create-job">Create</a>
+    <a href="/">Home</a>
 </body>
 </html>

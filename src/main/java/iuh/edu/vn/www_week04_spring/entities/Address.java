@@ -33,4 +33,16 @@ public class Address {
 
     @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Candidate> candidates = new ArrayList<>();
+
+    public Address() {}
+
+    public Address(String zipcode, String street,  String city, String number, int country) {
+        this.country = country;
+        this.zipcode = zipcode;
+        this.number = number;
+        this.city = city;
+        this.street = street;
+    }
+
+    
 }

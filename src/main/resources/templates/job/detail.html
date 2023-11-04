@@ -65,6 +65,57 @@
             padding: 10px;
             background-color: #f2f2f2;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .pagination ul {
+            list-style: none;
+            padding: 0;
+        }
+        .pagination li {
+            display: inline;
+            margin: 0 5px;
+        }
+        .pagination a {
+            text-decoration: none;
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .pagination a.active {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -99,5 +150,46 @@
             </tbody>
         </table>
     </ul>
+
+    <h2>Candidate for job</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Date of Birth</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>City</th>
+                <th>Missing skill</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="candidate : ${candidates}">
+                <td th:text="${candidate.id}"></td>
+                <td th:text="${candidate.full_name}"></td>
+                <td th:text="${#dates.format(candidate.dob, 'yyyy-MM-dd')}"></td>
+                <td th:text="${candidate.email}"></td>
+                <td th:text="${candidate.phone}"></td>
+                <td th:text="${candidate.address}"></td>
+                <td th:text="${candidate.missingSkill}"></td>
+                <td>
+                    <a th:href="@{'/candidates/' + ${candidate.id}}">Detail</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${totalPages > 1}">
+        <div class="pagination">
+            <ul>
+                <li th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}">
+                    <a th:href="@{'/job/' + ${job.id} + '?page=' + ${pageNumber} + '&amount=' + ${amount}}" th:text="${pageNumber}" th:class="${pageNumber == page} ? 'active'"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <a href="/">Home</a>
 </body>
 </html>

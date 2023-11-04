@@ -20,6 +20,15 @@ public class Candidate_Skill {
     private Skill skill;
     private int skill_level;
     private String more_infos;
+
+    public Candidate_Skill() { }
+
+    public Candidate_Skill(Candidate candidate, Skill skill, int skill_level, String more_infos) {
+        this.candidate = candidate;
+        this.skill = skill;
+        this.skill_level = skill_level;
+        this.more_infos = more_infos;
+    }
 }
 
 

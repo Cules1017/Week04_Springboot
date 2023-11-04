@@ -2,6 +2,7 @@ package iuh.edu.vn.www_week04_spring.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,13 +14,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import iuh.edu.vn.www_week04_spring.common.Pagination;
+import iuh.edu.vn.www_week04_spring.entities.Candidate;
 import iuh.edu.vn.www_week04_spring.entities.Company;
 import iuh.edu.vn.www_week04_spring.entities.Job;
 import iuh.edu.vn.www_week04_spring.entities.Job_Skill;
 import iuh.edu.vn.www_week04_spring.entities.Skill;
+import iuh.edu.vn.www_week04_spring.models.candidate.JobCandidateModel;
 import iuh.edu.vn.www_week04_spring.models.job.CreateJobModel;
 import iuh.edu.vn.www_week04_spring.services.implement.CompanyService;
 import iuh.edu.vn.www_week04_spring.services.implement.SkillService;
+import iuh.edu.vn.www_week04_spring.services.interfaces.ICandidateService;
 import iuh.edu.vn.www_week04_spring.services.interfaces.IJobService;
 import iuh.edu.vn.www_week04_spring.services.interfaces.IJobSkillService;
 
@@ -36,7 +41,10 @@ public class JobController {
     private SkillService skillService;
 
     @Autowired
-    private IJobSkillService jobSkillService; 
+    private IJobSkillService jobSkillService;
+    
+    @Autowired
+    private ICandidateService candidateService; 
 
     @GetMapping("/jobs")
     public String listJobs(Model model,
@@ -51,15 +59,26 @@ public class JobController {
     }
     
     @GetMapping("/job/{id}")
-    public String showJobDetail(@PathVariable("id") Long jobId, Model model) {
+    public String showJobDetail(@PathVariable("id") Long jobId, 
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int amount,
+            Model model) {
+                
         Job job = jobService.getJobById(jobId);
 
         if (job == null) {
-            // Handle job not found
-            return "jobNotFound";
+            return "notFound";
         }
 
         model.addAttribute("job", job);
+
+        Pagination<Candidate> candidates = candidateService.findCandidatesWithMatchingSkills(job, page, amount);
+        List<JobCandidateModel> jobCandidateModels = candidates.getContent().stream().map(x -> new JobCandidateModel(x, job)).collect(Collectors.toList());
+        model.addAttribute("candidates", jobCandidateModels);
+        model.addAttribute("page", page);
+        model.addAttribute("amount", amount);
+        model.addAttribute("totalPages", candidates.getTotalPages());
+        
         return "job/detail";
     }
     
@@ -75,7 +94,7 @@ public class JobController {
         model.addAttribute("companies", companies);
         model.addAttribute("skills", skills);
 
-        return "job/create"; // Create an HTML form to capture job details
+        return "job/create"; 
     }
 
     @PostMapping("/create-job")
@@ -96,7 +115,6 @@ public class JobController {
                 return "error-page"; 
             }
             else {
-                //skills.add(job_skill.ParseToEntity(skill));
                 Job_Skill skillJob = new Job_Skill();
                 skillJob.setSkill(skill);
                 skills.add(skillJob);

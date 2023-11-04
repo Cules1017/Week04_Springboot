@@ -1,12 +1,13 @@
 package iuh.edu.vn.www_week04_spring.models.skill;
 
+import iuh.edu.vn.www_week04_spring.common.Enum.SkillLevel;
 import iuh.edu.vn.www_week04_spring.entities.Job_Skill;
 import iuh.edu.vn.www_week04_spring.entities.Skill;
 import lombok.Data;
 
 @Data
 public class SkillJobModel {
-    private int skill_level;
+    private SkillLevel skill_level;
     private String more_infos;
     private Long skill_id;
 

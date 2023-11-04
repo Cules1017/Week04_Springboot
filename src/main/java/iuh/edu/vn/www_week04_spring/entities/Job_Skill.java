@@ -1,4 +1,5 @@
 package iuh.edu.vn.www_week04_spring.entities;
+import iuh.edu.vn.www_week04_spring.common.Enum.SkillLevel;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
@@ -18,7 +19,7 @@ public class Job_Skill {
     @ManyToOne
     @JoinColumn(name = "skill_id")
     private Skill skill;
-    private int skill_level;
+    private SkillLevel skill_level;
     private String more_infos;
 }
 

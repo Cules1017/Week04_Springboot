@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Candidate Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .candidate-details {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .address-details, .skills, .experiences {
+            margin-top: 20px;
+        }
+
+        .experiences li {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            background-color: #fff;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        thead {
+            background-color: #333;
+            color: #fff;
+        }
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Candidate Detail</h1>
+
+    <div class="candidate-details">
+        <h2 th:text="${candidate.full_name}"></h2>
+        <p>Date of Birth: <span th:text="${#dates.format(candidate.dob, 'yyyy-MM-dd')}"></span></p>
+        <p>Email: <span th:text="${candidate.email}"></span></p>
+        <p>Phone: <span th:text="${candidate.phone}"></span></p>
+    </div>
+
+    <div class="address-details">
+        <h2>Address</h2>
+        <p>Country: <span th:text="${candidate.address.country}"></span></p>
+        <p>Zipcode: <span th:text="${candidate.address.zipcode}"></span></p>
+        <p>Number: <span th:text="${candidate.address.number}"></span></p>
+        <p>City: <span th:text="${candidate.address.city}"></span></p>
+        <p>Street: <span th:text="${candidate.address.street}"></span></p>
+    </div>
+
+    <div class="skills">
+        <h2>Skills</h2>
+        <ul>
+            <li th:each="cs : ${candidate.candidate_skills}">
+                <p>Skill: <span th:text="${cs.skill.skill_name}"></span></p>
+                <p>Skill Level: <span th:text="${cs.skill_level}"></span></p>
+                <p>More Information: <span th:text="${cs.more_infos}"></span></p>
+            </li>
+        </ul>
+    </div>
+
+    <div class="experiences">
+        <h2>Experiences</h2>
+        <ul>
+            <li th:each="experience : ${candidate.experiences}">
+                <div>
+                    <p>Position: <span th:text="${experience.position}"></span></p>
+                    <p>Company: <span th:text="${experience.company}"></span></p>
+                    <p>Start Date: <span th:text="${#dates.format(experience.startDate, 'yyyy-MM-dd')}"></span></p>
+                    <p>End Date: <span th:text="${#dates.format(experience.endDate, 'yyyy-MM-dd')}"></span></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <h1>Job List for user</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Job Name</th>
+                <th>Job Description</th>
+                <th>Company</th>
+                <th>Missing skills</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="job : ${jobs}">
+                <td th:text="${job.id}"></td>
+                <td th:text="${job.job_name}"></td>
+                <td th:text="${job.job_desc}"></td>
+                <td th:text="${job.companyName}"></td>
+                <td th:text="${job.missingSkill}"></td>
+                <td>
+                    <a th:href="@{'/job/' + ${job.Id}}">Detail</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/">Home</a>
+</body>
+</html>

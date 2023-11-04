@@ -33,4 +33,14 @@ public class Candidate {
 
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<Experience> experiences = new ArrayList<>();
+
+    public Candidate() {}
+
+    public Candidate(String full_name, Date dob, Address address, String phone, String email) {
+        this.dob = dob;
+        this.phone = phone;
+        this.email = email;
+        this.full_name = full_name;
+        this.address = address;
+    }
 }

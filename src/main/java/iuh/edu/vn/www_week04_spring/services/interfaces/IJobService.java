@@ -1,7 +1,10 @@
 package iuh.edu.vn.www_week04_spring.services.interfaces;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
+import iuh.edu.vn.www_week04_spring.entities.Candidate;
 import iuh.edu.vn.www_week04_spring.entities.Job;
 
 public interface IJobService {
@@ -10,4 +13,6 @@ public interface IJobService {
     Job getJobById(Long id);
     
     Job createJob(Job job);
+
+    List<Job> findJobsWithMatchingSkills(Candidate candidate);
 }

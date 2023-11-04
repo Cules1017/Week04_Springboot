@@ -1,11 +1,7 @@
 package iuh.edu.vn.www_week04_spring.models.job;
 
-import java.util.List;
-
 import iuh.edu.vn.www_week04_spring.entities.Company;
 import iuh.edu.vn.www_week04_spring.entities.Job;
-import iuh.edu.vn.www_week04_spring.entities.Job_Skill;
-import iuh.edu.vn.www_week04_spring.models.skill.SkillJobModel;
 import lombok.Data;
 
 @Data
