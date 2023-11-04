@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Job List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            background-color: #fff;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        thead {
+            background-color: #333;
+            color: #fff;
+        }
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .pagination ul {
+            list-style: none;
+            padding: 0;
+        }
+        .pagination li {
+            display: inline;
+            margin: 0 5px;
+        }
+        .pagination a {
+            text-decoration: none;
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .pagination a.active {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Job List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Job Name</th>
+                <th>Job Description</th>
+                <th>Company</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="job : ${jobPage.content}">
+                <td th:text="${job.id}"></td>
+                <td th:text="${job.job_name}"></td>
+                <td th:text="${job.job_desc}"></td>
+                <td th:text="${job.company.comp_name}"></td>
+                <td>
+                    <a th:href="@{'job/' + ${job.Id}}">Detail</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="pagination">
+        <ul>
+            <li th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}">
+                <a th:href="@{'/jobs?page=' + ${pageNumber} + '&amount=' + ${amount}}" th:text="${pageNumber}" th:class="${pageNumber == page} ? 'active'"></a>
+            </li>
+        </ul>
+    </div>
+    <a href="/create-job">Create</a>
+</body>
+</html>

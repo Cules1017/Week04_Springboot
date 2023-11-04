@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Job Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        div {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 20px;
+        }
+
+        .skills {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            border-radius: 5px;
+        }
+        .skills table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .skills th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+        .skills th {
+            background-color: #333;
+            color: #fff;
+        }
+        .skills tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .skills tr:hover {
+            background-color: #ddd;
+        }
+        .skills .card-info {
+            display: none;
+        }
+        .skills tr:hover .card-info {
+            display: block;
+            padding: 10px;
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Job Detail</h1>
+    <div th:object="${job}">
+        <p>ID: <span th:text="*{id}"></span></p>
+        <p>Job Name: <span th:text="*{job_name}"></span></p>
+        <p>Job Description: <span th:text="*{job_desc}"></span></p>
+        <p>Company: <span th:text="*{company.comp_name}"></span></p>
+    </div>
+    <h2>Skills:</h2>
+    <ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Level</th>
+                    <th>Description</th>
+                    <th>More Information</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="skill : ${job.job_skills}" class="skills">
+                    <td th:text="${skill.skill.skill_name}"></td>
+                    <td th:text="${skill.skill_level}">Level 1</td>
+                    <td th:text="${skill.skill.skill_desc}">Description 1</td>
+                    <td>
+                        <div class="card-info" th:text="${skill.more_infos}">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ul>
+</body>
+</html>

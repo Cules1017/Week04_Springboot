@@ -4,11 +4,13 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -20,9 +22,10 @@ public class Skill {
     private String skill_name;
     private String skill_desc;
 
-    @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Job_Skill> job_skills = new ArrayList<>();
 
-    @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL)
-    private List<Job_Skill> candidate_skills = new ArrayList<>();
+    @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Candidate_Skill> candidate_skills = new ArrayList<>();
+
 }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Job</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        select[multiple] {
+            height: auto;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create a Job</h1>
+    <div class="container">
+        <form action="/create-job" method="post" th:object="${job}">
+            <!-- Job Name -->
+            <div class="form-group">
+                <label for="jobName">Job Name:</label>
+                <input type="text" id="jobName" name="jobName" th:field="*{job_name}" required />
+            </div>
+
+            <!-- Job Description -->
+            <div class="form-group">
+                <label for="jobDescription">Job Description:</label>
+                <textarea id="jobDescription" name="jobDescription" th:field="*{job_desc}" required></textarea>
+            </div>
+
+            <!-- Company Selection -->
+            <div class="form-group">
+                <label for="companyId">Company:</label>
+                <select id="companyId" name="companyId" th:field="*{companyId}" required>
+                    <option value="">Select a company</option>
+                    <!-- Use Thymeleaf to iterate over companies and populate options -->
+                    <option th:each="company : ${companies}" th:value="${company.id}" th:text="${company.comp_name}"></option>
+                </select>
+            </div>
+
+            <!-- Skill Selection (Multi-Select Dropdown) -->
+            <div class="form-group">
+                <label for="SkillJobModels">Skills:</label>
+                <select id="skills" name="SkillJobModels" th:field="*{SkillJobModels}" multiple="multiple" required>
+                    <!-- Use Thymeleaf to iterate over skills and populate options -->
+                    <option th:each="skill : ${skills}" th:value="${skill.id.toString()}" th:text="${skill.skill_name}"></option>
+                </select>
+            </div>
+
+            <input type="submit" value="Create Job" class="btn btn-primary" />
+        </form>
+    </div>
+</body>
+</html>
