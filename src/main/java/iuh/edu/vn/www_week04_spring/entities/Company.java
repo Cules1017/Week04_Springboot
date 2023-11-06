@@ -32,4 +32,18 @@ public class Company {
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Job> jobs = new ArrayList<>();
+
+    public Company() {
+
+    }
+
+    public Company(String about, String comp_name, String email, String phone, String web_url, Address address) {
+        this.about = about;
+        this.comp_name = comp_name;
+        this.email = email;
+        this.phone = phone;
+        this.web_url = web_url;
+        this.address = address;
+    }
+    
 }

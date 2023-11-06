@@ -86,14 +86,21 @@
         </tbody>
     </table>
     
-    <div class="pagination">
-        <ul>
-            <li th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}">
-                <a th:href="@{'/jobs?page=' + ${pageNumber} + '&amount=' + ${amount}}" th:text="${pageNumber}" th:class="${pageNumber == page} ? 'active'"></a>
-            </li>
-        </ul>
+    <div th:if="${totalPages > 0}" >
+        <div class="pagination">
+            <ul>
+                <li th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}">
+                    <a th:href="@{'/jobs?page=' + ${pageNumber} + '&amount=' + ${amount}}" th:text="${pageNumber}" th:class="${pageNumber == page} ? 'active'"></a>
+                </li>
+            </ul>
+        </div>
     </div>
     <a href="/create-job">Create</a>
+    
     <a href="/">Home</a>
+</br>
+</br>
+</br>
+<h1 style="text-align: center;"> WWW_WEEK5_TranThiMinhHuyen</h1>
 </body>
 </html>
