@@ -10,7 +10,7 @@
             background-color: #f2f2f2;
         }
         h1 {
-            background-color: #333;
+            background-color: #007bff;
             color: #fff;
             padding: 10px;
             text-align: center;
@@ -27,7 +27,7 @@
             text-align: left;
         }
         thead {
-            background-color: #333;
+            background-color: #007bff;
             color: #fff;
         }
         tbody tr:nth-child(odd) {
@@ -47,17 +47,31 @@
         }
         .pagination a {
             text-decoration: none;
-            background-color: #333;
+            background-color: #007bff;
             color: #fff;
             padding: 5px 10px;
             border-radius: 5px;
         }
         .pagination a.active {
             background-color: #f2f2f2;
-            color: #333;
+            color: #007bff;
         }
         a {
             text-decoration: none;
+        }
+        .achor {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover effect */
+        .achor:hover {
+            background-color: #2980b9;
         }
     </style>
 </head>
@@ -95,9 +109,9 @@
             </ul>
         </div>
     </div>
-    <a href="/create-job">Create</a>
+    <a class="achor" style="margin-left: 620px;" href="/create-job">Create</a>
     
-    <a href="/">Home</a>
+    <a class="achor" href="/">Home</a>
 </br>
 </br>
 </br>

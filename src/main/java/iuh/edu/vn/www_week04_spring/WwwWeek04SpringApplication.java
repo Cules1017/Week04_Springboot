@@ -74,7 +74,7 @@ public class WwwWeek04SpringApplication {
             addressRepository.save(add); 
  
             Candidate can=new Candidate("Name #"+i, 
-                   new Date(1998,rnd.nextInt(1,13),rnd.nextInt(1,29)), 
+                   new Date(102,rnd.nextInt(1,13),rnd.nextInt(1,29)), 
                    add, 
                    rnd.nextLong(1111111111L,9999999999L)+"", 
                    "mhuyen_"+i+"@gmail.com"); 

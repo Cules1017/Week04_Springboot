@@ -25,4 +25,5 @@ Candidates will be recommended some skills that they do not have for learning.
     ![joblist.png](/public/huyenlab5_6.jpeg)
 4. View the list of candidates, candidates can view their own information and see the companies that match their profile as well as their skills in relation to various job positions.
     ![candidatefillter.png](/public/huyenlab5_7.png)
+    ![candidatefillter1.png](/public/huyenlab5_8.jpeg)
     ![candidatedetail.png](/public/huyenlab5_9.jpeg)
